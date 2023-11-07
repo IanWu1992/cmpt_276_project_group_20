@@ -9,6 +9,6 @@ Please begin using the new project repository for all our work moving forward.
 
 previous activities:
 
-![previous_activity_record_1](images/activity_1.PNG)
-
 ![previous_activity_record_2](images/activity_2.PNG)
+
+![previous_activity_record_1](images/activity_1.PNG)
