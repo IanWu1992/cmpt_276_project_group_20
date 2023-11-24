@@ -63,7 +63,10 @@ Please add these ports.
 3. Replace those with .env file client ID and client secret.
 
 4. To get the refresh token, running app is needed and can be found from the terminal:
-   4.1:
+
+4.1:
+
+![sync](images/sync.png)
 
 4.2:
 
