@@ -12,7 +12,7 @@
 
 ## Challenges:
 
-1. API Integration Complexities: Faced challenges in integrating and synchronizing data between Google Calendar and Strava APIs, requiring detailed technical understanding.
+1. API Integration Complexities: Sudd challenges in integrating and synchronizing data between Google Calendar and Strava APIs, requiring detailed technical understanding.
 
 2. Cross-Platform Compatibility: Ensuring consistent functionality and appearance across different browsers and devices posed a significant challenge.
 
