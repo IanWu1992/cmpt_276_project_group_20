@@ -25,3 +25,5 @@
 6. User Interface Design: Crafting an engaging and intuitive user interface that caters to both novice and experienced runners.
 
 7. Compliance and Legal Considerations: Addressing legal and compliance aspects related to user data and third-party API usage.
+
+8. Team Member Departure: Midway through the project, we faced the unexpected challenge of a team member departing, which significantly impacted our workflow and progress. The sudden absence required us to redistribute workloads and responsibilities, adapt our project timeline, and overcome the additional strain on remaining team members to maintain the momentum and quality of the project. This experience emphasized the importance of resilience and adaptability within team dynamics.
