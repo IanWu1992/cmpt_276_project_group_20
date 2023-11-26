@@ -1,26 +1,28 @@
-version: '3.8'
+version: "3.8"
 
 services:
   server:
-    build: 
+    build:
       context: ./server
     volumes:
       - ./server:/app
       - /app/node_modules
     ports:
-      - '8000:8000'
+      - "8000:8000"
     environment:
       - NODE_ENV=development
+    network_mode: bridge
 
   client:
-    build: 
+    build:
       context: ./client
     volumes:
       - ./client:/app
       - /app/node_modules
     ports:
-      - '5173:5173'
+      - "5173:5173"
     environment:
       - NODE_ENV=development
     stdin_open: true
     tty: true
+    network_mode: bridge
