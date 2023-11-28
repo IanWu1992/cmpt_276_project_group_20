@@ -30,15 +30,15 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-          cache-dependency-path: 'MileStone2Items/Extrasize/client/package-lock.json'
+          cache-dependency-path: 'MileStone2Items/Extrasize/Client/package-lock.json'
       
       - name: Install Client dependencies
         run: npm install
-        working-directory: MileStone2Items/Extrasize/client
+        working-directory: MileStone2Items/Extrasize/Client
       
       - name: Build Client
         run: npm run dev
-        working-directory: MileStone2Items/Extrasize/client
+        working-directory: MileStone2Items/Extrasize/Client
 
       # Setup Node and install dependencies for the Server
       - name: Set up Node for Server
@@ -46,15 +46,15 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-          cache-dependency-path: 'MileStone2Items/Extrasize/server/package-lock.json'
+          cache-dependency-path: 'MileStone2Items/Extrasize/Server/package-lock.json'
       
       - name: Install Server dependencies
         run: npm install
-        working-directory: MileStone2Items/Extrasize/server
+        working-directory: MileStone2Items/Extrasize/Server
       
       - name: Build Server
         run: npm run dev
-        working-directory: MileStone2Items/Extrasize/server
+        working-directory: MileStone2Items/Extrasize/Server
 
       # If the client build outputs to 'dist', adjust the path accordingly
       - name: Setup Pages
@@ -63,7 +63,7 @@ jobs:
       - name: Upload artifact for Client
         uses: actions/upload-pages-artifact@v2
         with:
-          path: MileStone2Items/Extrasize/client/dist  # Adjust if your client output path is different
+          path: MileStone2Items/Extrasize/Client/dist  # Adjust if your client output path is different
       
       # Add a similar step for the server if it also needs to be deployed
 
