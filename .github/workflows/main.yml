@@ -1,63 +1,78 @@
 name: Deploy static content to Pages
 
 on:
+  # Runs on pushes targeting the default branch
   push:
-    branches: ['main']
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Allow one concurrent deployment
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
-  build-and-run:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Set up Node.js for Server
+
+      # Set up Node and install dependencies for the Server
+      - name: Set up Node for Server
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Specify the Node.js version
+          node-version: 18
           cache: 'npm'
+          cache-dependency-path: 'MileStone2Items/Extrasize/Server/package-lock.json'
       
-      - name: Install and run Server
-        run: |
-          npm install
-          npm start # Or any other command to run your server
-        working-directory: ./Server
-      
-      - name: Set up Node.js for Client
+      - name: Install Server dependencies
+        run: npm install
+        working-directory: MileStone2Items/Extrasize/Server
+
+      # Build Server
+      - name: Build Server
+        run: npm run build
+        working-directory: MileStone2Items/Extrasize/Server
+
+      # Set up Node and install dependencies for the Client
+      - name: Set up Node for Client
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Ensure this matches the client's Node.js version if different
+          node-version: 18
           cache: 'npm'
+          cache-dependency-path: 'MileStone2Items/Extrasize/Client/package-lock.json'
       
-      - name: Install and build Client
-        run: |
-          npm install
-          npm run build # Or any other command to build your client
-        working-directory: ./Client
-
+      - name: Install Client dependencies
+        run: npm install
+        working-directory: MileStone2Items/Extrasize/Client
       
+      # Build Client
+      - name: Build Client
+        run: npm run build
+        working-directory: MileStone2Items/Extrasize/Client
 
-      # If the client build outputs to 'dist', adjust the path accordingly
+      # Setup Pages and Upload artifact for Client
       - name: Setup Pages
         uses: actions/configure-pages@v3
       
       - name: Upload artifact for Client
         uses: actions/upload-pages-artifact@v2
         with:
-          path: MileStone2Items/Extrasize/client/dist  # Adjust if your client output path is different
+          path: MileStone2Items/Extrasize/Client/dist
       
-      # Add a similar step for the server if it also needs to be deployed
-
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
