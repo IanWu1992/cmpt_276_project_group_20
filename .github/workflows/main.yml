@@ -37,7 +37,7 @@ jobs:
       
       - name: Build Server
         run: npm run dev
-        working-directory: MileStone2Items/Extrasize/Server
+        working-directory: MileStone2Items/Extrasize/Server/package-lock.json'
 
       # Setup Node and install dependencies for the Client
       - name: Set up Node for Client
@@ -52,7 +52,7 @@ jobs:
       
       - name: Build Client
         run: npm run dev
-        working-directory: MileStone2Items/Extrasize/Client
+        working-directory: MileStone2Items/Extrasize/Client/package-lock.json'
 
       
 
