@@ -38,7 +38,7 @@ jobs:
       
       - name: Build Server
         run: npm run dev
-        working-directory: MileStone2Items/Extrasize/Server/package-lock.json'
+        working-directory: MileStone2Items/Extrasize/Server
 
       
 
