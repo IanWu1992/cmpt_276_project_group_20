@@ -40,22 +40,6 @@ jobs:
         run: npm run dev
         working-directory: MileStone2Items/Extrasize/Server/package-lock.json'
 
-      # Setup Node and install dependencies for the Client
-      - name: Set up Node for Client
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: 'MileStone2Items/Extrasize/client/package-lock.json'
-      
-      - name: Install Client dependencies
-        run: npm install
-        working-directory: MileStone2Items/Extrasize/Client
-      
-      - name: Build Client
-        run: npm run dev
-        working-directory: MileStone2Items/Extrasize/Client/package-lock.json'
-
       
 
       # If the client build outputs to 'dist', adjust the path accordingly
