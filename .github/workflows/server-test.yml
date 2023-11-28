@@ -1,6 +1,8 @@
 name: Server Test
 
-on: [testing]
+on: 
+  push:
+    branches: ['testing']
 
 jobs:
   tests:
