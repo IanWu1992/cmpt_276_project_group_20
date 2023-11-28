@@ -24,6 +24,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+# Setup Node and install dependencies for the Server
+      - name: Set up Node for Server
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: 'MileStone2Items/Extrasize/Server/package-lock.json'
+      
+      - name: Install Server dependencies
+        run: npm install
+        working-directory: MileStone2Items/Extrasize/Server
+      
+      - name: Build Server
+        run: npm run dev
+        working-directory: MileStone2Items/Extrasize/Server
+
       # Setup Node and install dependencies for the Client
       - name: Set up Node for Client
         uses: actions/setup-node@v3
@@ -39,22 +55,6 @@ jobs:
       - name: Build Client
         run: npm run dev
         working-directory: MileStone2Items/Extrasize/Client
-
-      # Setup Node and install dependencies for the Server
-      - name: Set up Node for Server
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: 'MileStone2Items/Extrasize/Server/package-lock.json'
-      
-      - name: Install Server dependencies
-        run: npm install
-        working-directory: MileStone2Items/Extrasize/Server
-      
-      - name: Build Server
-        run: npm run dev
-        working-directory: MileStone2Items/Extrasize/Server
 
       # If the client build outputs to 'dist', adjust the path accordingly
       - name: Setup Pages
