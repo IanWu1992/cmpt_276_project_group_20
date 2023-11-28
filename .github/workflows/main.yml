@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-# Setup Node and install dependencies for the Server
+      # Set up Node and install dependencies for the Server
       - name: Set up Node for Server
         uses: actions/setup-node@v3
         with:
@@ -35,12 +35,13 @@ jobs:
       - name: Install Server dependencies
         run: npm install
         working-directory: MileStone2Items/Extrasize/Server
-      
+
+      # Build Server
       - name: Build Server
-        run: npm start
+        run: npm run dev
         working-directory: MileStone2Items/Extrasize/Server
 
-      # Setup Node and install dependencies for the Client
+      # Set up Node and install dependencies for the Client
       - name: Set up Node for Client
         uses: actions/setup-node@v3
         with:
@@ -52,20 +53,24 @@ jobs:
         run: npm install
         working-directory: MileStone2Items/Extrasize/Client
       
+      # Build Client
       - name: Build Client
         run: npm run dev
         working-directory: MileStone2Items/Extrasize/Client
 
-      # If the client build outputs to 'dist', adjust the path accordingly
+      # Setup Pages and Upload artifact for Client
       - name: Setup Pages
         uses: actions/configure-pages@v3
       
       - name: Upload artifact for Client
         uses: actions/upload-pages-artifact@v2
         with:
-          path: MileStone2Items/Extrasize/Client/dist  # Adjust if your client output path is different
+          path: MileStone2Items/Extrasize/Client/dist
       
-      # Add a similar step for the server if it also needs to be deployed
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
 
       - name: Deploy to GitHub Pages
         id: deployment
