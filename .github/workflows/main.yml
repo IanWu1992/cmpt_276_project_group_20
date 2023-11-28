@@ -24,21 +24,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Setup Node and install dependencies for the Client
-      - name: Set up Node for Client
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
-      
-      - name: Install Client dependencies
-        run: npm install
-        working-directory: MileStone2Items/Extrasize/client
-      
-      - name: Build Client
-        run: npm run build
-        working-directory: MileStone2Items/Extrasize/client
-
       # Setup Node and install dependencies for the Server
       - name: Set up Node for Server
         uses: actions/setup-node@v3
@@ -48,11 +33,28 @@ jobs:
       
       - name: Install Server dependencies
         run: npm install
-        working-directory: MileStone2Items/Extrasize/server
+        working-directory: MileStone2Items/Extrasize/Server
       
       - name: Build Server
         run: npm run build
-        working-directory: MileStone2Items/Extrasize/server
+        working-directory: MileStone2Items/Extrasize/Server
+
+      # Setup Node and install dependencies for the Client
+      - name: Set up Node for Client
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      
+      - name: Install Client dependencies
+        run: npm install
+        working-directory: MileStone2Items/Extrasize/Client
+      
+      - name: Build Client
+        run: npm run build
+        working-directory: MileStone2Items/Extrasize/Client
+
+      
 
       # If the client build outputs to 'dist', adjust the path accordingly
       - name: Setup Pages
