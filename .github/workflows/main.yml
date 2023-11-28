@@ -15,30 +15,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build-and-run:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      # Setup Node and install dependencies for the Server
-      - name: Set up Node for Server
+      
+      - name: Set up Node.js for Server
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 18 # Specify the Node.js version
           cache: 'npm'
-          cache-dependency-path: 'MileStone2Items/Extrasize/server/package-lock.json'
       
-      - name: Install Server dependencies
-        run: npm install
-        working-directory: MileStone2Items/Extrasize/Server
+      - name: Install and run Server
+        run: |
+          npm install
+          npm start # Or any other command to run your server
+        working-directory: ./Server
       
-      - name: Build Server
-        run: npm run dev
-        working-directory: MileStone2Items/Extrasize/Server
+      - name: Set up Node.js for Client
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Ensure this matches the client's Node.js version if different
+          cache: 'npm'
+      
+      - name: Install and build Client
+        run: |
+          npm install
+          npm run build # Or any other command to build your client
+        working-directory: ./Client
 
       
 
