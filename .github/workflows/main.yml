@@ -1,27 +1,20 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ['main']
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: 'pages'
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
     environment:
       name: github-pages
@@ -30,22 +23,48 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Node
+
+      # Setup Node and install dependencies for the Client
+      - name: Set up Node for Client
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'npm'
-      - name: Install dependencies
+      
+      - name: Install Client dependencies
         run: npm install
-      - name: Build
+        working-directory: MileStone2Items/Extrasize/client
+      
+      - name: Build Client
         run: npm run build
+        working-directory: MileStone2Items/Extrasize/client
+
+      # Setup Node and install dependencies for the Server
+      - name: Set up Node for Server
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      
+      - name: Install Server dependencies
+        run: npm install
+        working-directory: MileStone2Items/Extrasize/server
+      
+      - name: Build Server
+        run: npm run build
+        working-directory: MileStone2Items/Extrasize/server
+
+      # If the client build outputs to 'dist', adjust the path accordingly
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - name: Upload artifact
+      
+      - name: Upload artifact for Client
         uses: actions/upload-pages-artifact@v2
         with:
-          # Upload dist repository
-          path: './dist'
+          path: MileStone2Items/Extrasize/client/dist  # Adjust if your client output path is different
+      
+      # Add a similar step for the server if it also needs to be deployed
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
