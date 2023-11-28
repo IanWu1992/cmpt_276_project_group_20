@@ -36,7 +36,7 @@ jobs:
         working-directory: MileStone2Items/Extrasize/Server
       
       - name: Build Server
-        run: npm run build
+        run: npm run dev
         working-directory: MileStone2Items/Extrasize/Server
 
       # Setup Node and install dependencies for the Client
@@ -51,7 +51,7 @@ jobs:
         working-directory: MileStone2Items/Extrasize/Client
       
       - name: Build Client
-        run: npm run build
+        run: npm run dev
         working-directory: MileStone2Items/Extrasize/Client
 
       
