@@ -30,6 +30,7 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+          cache-dependency-path: 'MileStone2Items/Extrasize/server/package-lock.json'
       
       - name: Install Server dependencies
         run: npm install
@@ -45,6 +46,7 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+          cache-dependency-path: 'MileStone2Items/Extrasize/client/package-lock.json'
       
       - name: Install Client dependencies
         run: npm install
