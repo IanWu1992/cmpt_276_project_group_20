@@ -16,20 +16,20 @@ const dbPath = path.resolve(__dirname, "db", "db.sqlite");
 
 // Create the database file and tables if they don't exist
 const initDB = async () => {
-	try {
-		if (!fs.existsSync(path.resolve(__dirname, "db"))) {
-			fs.mkdirSync(path.resolve(__dirname, "db"));
-		}
+  try {
+    if (!fs.existsSync(path.resolve(__dirname, "db"))) {
+      fs.mkdirSync(path.resolve(__dirname, "db"));
+    }
 
-		if (!fs.existsSync(dbPath)) {
-			const db = await open({
-				filename: dbPath,
-				driver: sqlite3.Database,
-			});
+    if (!fs.existsSync(dbPath)) {
+      const db = await open({
+        filename: dbPath,
+        driver: sqlite3.Database,
+      });
 
-			// Creating the users table
-			await db.exec(
-				`CREATE TABLE IF NOT EXISTS users (
+      // Creating the users table
+      await db.exec(
+        `CREATE TABLE IF NOT EXISTS users (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE,
             name TEXT,
@@ -44,15 +44,15 @@ const initDB = async () => {
       refreshReadToken TEXT,
       refreshWriteToken TEXT
         )`
-			);
+      );
 
-			console.log("Created users table");
-		} else {
-			console.log("Connected to the existing database");
-		}
-	} catch (err) {
-		console.error("Error initializing database:", err);
-	}
+      console.log("Created users table");
+    } else {
+      console.log("Connected to the existing database");
+    }
+  } catch (err) {
+    console.error("Error initializing database:", err);
+  }
 };
 
 initDB();
@@ -65,5 +65,5 @@ app.use("/", require("./Routes/CalendarRoute"));
 
 // Start the server
 app.listen(port, () => {
-	console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running on port: ${port}`);
 });

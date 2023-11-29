@@ -1,6 +1,6 @@
 import React from "react";
 import "./Sidebar.css";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/Logo.png";
 import workoutIcon from "../../assets/workout.png";
 
 const Sidebar = ({ activities }) => {
