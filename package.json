@@ -29,7 +29,7 @@
 		"react-router-use-history": "^1.1.0",
 		"styled-components": "^5.3.11",
 		"vite": "^4.4.5",
-		"@vitejs/plugin-react": "^4.0.3",
+		"@vitejs/plugin-react": "^4.0.3"
 	},
 	"devDependencies": {
 		"@types/react": "^18.2.15",
