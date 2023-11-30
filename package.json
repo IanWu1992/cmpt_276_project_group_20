@@ -6,7 +6,6 @@
 	"scripts": {
 		"dev": "vite --host",
 		"build": "vite build",
-		"start": "node Server/server.js",
 		"lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview"
 	},
@@ -27,7 +26,9 @@
 		"react-leaflet-cluster": "^2.1.0",
 		"react-router-dom": "^6.11.1",
 		"react-router-use-history": "^1.1.0",
-		"styled-components": "^5.3.11",
+		"styled-components": "^5.3.11"
+	},
+	"devDependencies": {
 		"vite": "^4.4.5",
 		"@vitejs/plugin-react": "^4.0.3",
 		"tailwindcss": "^3.3.5",
@@ -39,8 +40,5 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.3",
 		"postcss": "^8.4.31"
-	},
-	"devDependencies": {
-		
 	}
 }
