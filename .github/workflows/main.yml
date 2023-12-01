@@ -19,7 +19,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # This line is changed to use self-hosted runners
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,7 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: './Client/dist' # Make sure to specify the path to your build directory
+          path: './Client/dist' # The path to the build directory
 
       - name: Deploy to GitHub Pages
         id: deployment
