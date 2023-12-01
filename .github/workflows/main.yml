@@ -19,7 +19,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: self-hosted  # This line is changed to use self-hosted runners
+    runs-on: ubuntu-latest  # This line is changed to use self-hosted runners
     steps:
       - name: Checkout
         uses: actions/checkout@v4
