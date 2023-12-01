@@ -19,7 +19,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: self-hosted  # Using a self-hosted runner
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,30 +47,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: './Client/dist'
+          path: './Client/dist' # Make sure to specify the path to your build directory
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-
-      - name: Remove Old Server Container
-        run: |
-          if (docker rm -f extrasize_server) {
-            echo "Container removed successfully"
-          } else {
-            echo "Container could not be removed or did not exist"
-          }
-
-      - name: Remove Old Client Container
-        run: |
-          if (docker rm -f extrasize_client) {
-            echo "Container removed successfully"
-          } else {
-            echo "Container could not be removed or did not exist"
-          }
-
-      - name: Run New Server Container
-        run: docker run -d -p 8000:8000 --name extrasize_server ianwu1992/cmpt_276_project_group_20-server:latest
-
-      - name: Run New Client Container
-        run: docker run -d -p 5173:80 --name extrasize_client ianwu1992/cmpt_276_project_group_20-client:latest
