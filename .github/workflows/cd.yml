@@ -1,68 +1,25 @@
-name: Deploy static content to Pages
+name: CD Pipeline
 
 on:
-  push:
-    branches: ['main']
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: self-hosted  # Using a self-hosted runner
+    runs-on: self-hosted
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: Client/package-lock.json
-
-      - name: Install dependencies
-        run: |
-          cd Client
-          npm install --legacy-peer-deps
-
-      - name: Build
-        run: |
-          cd Client
-          npm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: './Client/dist'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
-
-      - name: Remove Old Server Container
-        run: |
-          docker rm -f extrasize_server 2>$null
-
-      - name: Remove Old Client Container
-        run: |
-          docker rm -f extrasize_client 2>$null
-
+      # Assuming that your Docker Hub username is 'ianwu1992' and the images are named 'workout-project-server' and 'workout-project-client'
+      - name: Pull Server Image
+        run: sudo docker pull ianwu1992/cmpt_276_project_group_20-server:latest
+      - name: Pull Client Image
+        run: sudo docker pull ianwu1992/cmpt_276_project_group_20-client:latest
+      - name: Delete Old Server Container
+        run: sudo docker rm -f extrasize_server || true
+      - name: Delete Old Client Container
+        run: sudo docker rm -f extrasize_client || true
       - name: Run New Server Container
-        run: docker run -d -p 8000:8000 --name extrasize_server ianwu1992/cmpt_276_project_group_20-server:latest
-
+        run: sudo docker run -d -p 8000:8000 --name extrasize_server ianwu1992/cmpt_276_project_group_20-server:latest
       - name: Run New Client Container
-        run: docker run -d -p 5173:80 --name extrasize_client ianwu1992/cmpt_276_project_group_20-client:latest
+        run: sudo docker run -d -p 5173:80 --name extrasize_client ianwu1992/cmpt_276_project_group_20-client:latest
