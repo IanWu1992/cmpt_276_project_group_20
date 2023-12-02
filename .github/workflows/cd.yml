@@ -17,10 +17,12 @@ jobs:
         run: docker pull ianwu1992/cmpt_276_project_group_20-client:latest
 
       - name: Delete Old Server Container
-        run: docker rm -f server-1 *>$null
+        continue-on-error: true
+        run: docker rm -f server-1 2>$null
 
       - name: Delete Old Client Container
-        run: docker rm -f client-1 *>$null
+        continue-on-error: true
+        run: docker rm -f client-1 2>$null
 
       - name: Run New Server Container
         run: docker run -d -p 8000:8000 --name server-1 ianwu1992/cmpt_276_project_group_20-server:latest
