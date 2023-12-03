@@ -11,22 +11,22 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Pull Server Image
-        run: docker pull ianwu1992/cmpt_276_project_group_20-server:latest
+        run: sudo docker pull ianwu1992/cmpt_276_project_group_20-server:latest
 
       - name: Pull Client Image
-        run: docker pull ianwu1992/cmpt_276_project_group_20-client:latest
+        run: sudo docker pull ianwu1992/cmpt_276_project_group_20-client:latest
 
       - name: Delete Old Server Container
         continue-on-error: true
-        run: docker rm -f server-1 2>$null
+        run: sudo docker rm -f server-1 2>$null
 
       - name: Delete Old Client Container
         continue-on-error: true
-        run: docker rm -f client-1 2>$null
+        run: sudo docker rm -f client-1 2>$null
 
       - name: Run New Server Container
-        run: docker run -d -p 8000:8000 --name server-1 ianwu1992/cmpt_276_project_group_20-server:latest
+        run: sudo docker run -d -p 8000:8000 --name server-1 ianwu1992/cmpt_276_project_group_20-server:latest
 
       - name: Run New Client Container
-        run: docker run -d -p 5173:5173 --name client-1 ianwu1992/cmpt_276_project_group_20-client:latest
+        run: sudo docker run -d -p 5173:443 --name client-1 ianwu1992/cmpt_276_project_group_20-client:latest
 
